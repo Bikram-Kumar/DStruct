@@ -1,4 +1,3 @@
-
 #pragma once
 
 #include <stddef.h>
@@ -8,6 +7,6 @@ typedef struct {
     struct LinkedList* next;
 } LinkedList;
 
-typedef struct {} DoublyLinkedList;
+typedef struct {int val} DoublyLinkedList;
 
 void init_linked_list(LinkedList*);
