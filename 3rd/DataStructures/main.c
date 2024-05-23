@@ -5,8 +5,8 @@
 int main() {
     
     LinkedList ll;
-    printf("%d", ll.val+8);
+    printf("%d\n", ll.val+8);
     init_linked_list(&ll);
-    printf("%d", ll.val);
+    printf("%d\n", ll.val);
     return 0;
 }
