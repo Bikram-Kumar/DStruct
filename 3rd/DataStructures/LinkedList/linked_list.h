@@ -7,6 +7,6 @@ typedef struct {
     struct LinkedList* next;
 } LinkedList;
 
-typedef struct {int val} DoublyLinkedList;
+typedef struct {int val;} DoublyLinkedList;
 
 void init_linked_list(LinkedList*);

@@ -1,2 +1,2 @@
 
-typedef struct {int val} Graph;
+typedef struct {int val;} Graph;
