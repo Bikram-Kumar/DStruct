@@ -2,7 +2,13 @@ cmake_minimum_required(VERSION 3.10)
 
 project(DataStructures)
 
-add_executable(DataStructures main.c LinkedList/linked_list.c)
+add_executable(
+    DataStructures 
+    main.c
+    LinkedList/linked_list.c
+    Arrays/arrays.c
+    
+)
 
 
 # target_include_directories(DataStructures PRIVATE "${PROJECT_BINARY_DIR}")
