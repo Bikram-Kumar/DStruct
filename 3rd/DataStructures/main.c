@@ -2,13 +2,27 @@
 #include "main.h"
 #define NEW(x) malloc(sizeof(x))
 
-void print(LinkedList* this) {
-    printf("Linked List: ");
+void print(DLinkedList* this) {
+    printf("DLinked List: ");
     
-    while (this != NULL) {
+    while (1) {
         printf("%d ", this->val);
+        if (this->next == NULL) {
+            break;
+        }
         this = this->next;
     }
+    printf("\nReverse List: ");
+    
+    while (1) {
+        printf("%d ", this->val);
+        if (this->prev == NULL) {
+            break;
+        }
+        this = this->prev;
+    }
+
+  
     printf("\n");
 }
 
@@ -16,13 +30,13 @@ void print(LinkedList* this) {
 
 int main() {
     
-    LinkedList *ll = NEW(LinkedList);
-    init_linked_list(ll);
-    ll->add(ll, NEW(LinkedList), 8);
-    ll->add(ll, NEW(LinkedList), 9);
-    ll->add(ll, NEW(LinkedList), 76);
-    ll->add(ll, NEW(LinkedList), 59);
-    ll->insert(ll, NEW(LinkedList), 2, 800);
+    DLinkedList *ll = NEW(DLinkedList);
+    init_dlinked_list(ll);
+    ll->add(ll, NEW(DLinkedList), 8);
+    ll->add(ll, NEW(DLinkedList), 9);
+    ll->add(ll, NEW(DLinkedList), 76);
+    ll->add(ll, NEW(DLinkedList), 59);
+    ll->insert(ll, NEW(DLinkedList), 2, 800);
     
     printf("Size: %d\n", ll->size(ll));
     print(ll);
