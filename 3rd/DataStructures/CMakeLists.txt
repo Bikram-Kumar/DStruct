@@ -5,7 +5,7 @@ project(DataStructures)
 add_executable(DataStructures main.c LinkedList/linked_list.c)
 
 
-target_include_directories(DataStructures PRIVATE "${PROJECT_BINARY_DIR}")
+# target_include_directories(DataStructures PRIVATE "${PROJECT_BINARY_DIR}")
 
 
 if (WIN32)
