@@ -35,8 +35,29 @@ int queue_dequeue (Queue*);
 
 
 
-typedef struct {int val;} CircularQueue;
-typedef struct {int val;} Dequeue;
+typedef struct Deque {
+    int* arr;
+    int front;
+    int capacity;
+    int size;
+    int (*push_front) (struct Deque*, int);
+    int (*pop_front) (struct Deque*);
+    int (*push_back) (struct Deque*, int);
+    int (*pop_back) (struct Deque*);
+} Deque;
+
+void init_deque (Deque*,int);
+int deque_push_front (Deque*, int);
+int deque_pop_front (Deque*);
+int deque_push_back (Deque*, int);
+int deque_pop_back (Deque*);
+
+
+
+
+
+
+
 
 
 

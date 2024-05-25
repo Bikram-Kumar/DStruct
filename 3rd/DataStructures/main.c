@@ -2,8 +2,8 @@
 #include "main.h"
 #define NEW(x) malloc(sizeof(x))
 
-void print(Queue* this) {
-    printf("Queue: ");
+void print(Deque* this) {
+    printf("Deque: ");
     
     for (int i = 0; i < this->size; i++) {
         printf("%d ", *(this->arr + ((this->front + i) % this->capacity)));
@@ -16,18 +16,24 @@ void print(Queue* this) {
 
 
 int main() {
-    Queue* q = NEW(Queue);
-    init_queue(q,4);
-    int n;
+    Deque* q = NEW(Deque);
+    init_deque(q,4);
+    int n,j,k;
     while (1) {
         scanf("%d", &n);
-        int j,k;
+        
         if (n == 1) {
             scanf("%d", &k);
-            j = q->enqueue(q, k);
-        } else {
-            j = q->dequeue(q);
+            j = q->push_front(q, k);
+        } else if (n == 2) {
+            j = q->pop_front(q);
+        } else if (n == 3) {
+            scanf("%d", &k);
+            j = q->push_back(q, k);
+        } else if (n == 4) {
+            j = q->pop_back(q);
         }
+        
         printf("%d\n", j);
         print(q);
     }
