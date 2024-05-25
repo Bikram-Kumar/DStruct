@@ -2,11 +2,13 @@
 #include "main.h"
 #define NEW(x) malloc(sizeof(x))
 
-void print(Stack* this) {
-    printf("Stack: ");
-    for (int i = 0; i < this->top; i++) {
-        printf("%d ", *(this->arr + i));
+void print(Queue* this) {
+    printf("Queue: ");
+    
+    for (int i = 0; i < this->size; i++) {
+        printf("%d ", *(this->arr + ((this->front + i) % this->capacity)));
     }
+   
   
     printf("\n");
 }
@@ -14,34 +16,22 @@ void print(Stack* this) {
 
 
 int main() {
-    Stack* s = NEW(Stack);
-    init_stack(s,4);
-    print(s);
-    s->pop(s);
-    print(s);
-    s->push(s,8);
-    print(s);
-    s->push(s,3);
-    print(s);
-    s->push(s,0);
-    print(s);
-    printf("%d\n", s->push(s,3));
-    print(s);
-    s->push(s,6);
-    print(s);
-    s->push(s,6);
-    print(s);
-    printf("%d\n", s->push(s,6));
-    print(s);
-    printf("%d\n", s->pop(s));
-    print(s);
-    s->pop(s);
-    print(s);
-    s->pop(s);
-    print(s);
-    s->pop(s);
-    print(s);
-    printf("%d\n", s->pop(s));
-    print(s);
+    Queue* q = NEW(Queue);
+    init_queue(q,4);
+    int n;
+    while (1) {
+        scanf("%d", &n);
+        int j,k;
+        if (n == 1) {
+            scanf("%d", &k);
+            j = q->enqueue(q, k);
+        } else {
+            j = q->dequeue(q);
+        }
+        printf("%d\n", j);
+        print(q);
+    }
+   
+    
     return 0;
 }

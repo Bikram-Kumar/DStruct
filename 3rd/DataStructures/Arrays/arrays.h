@@ -15,7 +15,26 @@ void init_stack (Stack*,int);
 int stack_push (Stack*, int);
 int stack_pop (Stack*);
 
-typedef struct {int val;} Queue;
+
+
+
+typedef struct Queue {
+    int* arr;
+    int front;
+    int capacity;
+    int size;
+    int (*enqueue) (struct Queue*, int);
+    int (*dequeue) (struct Queue*);
+} Queue;
+
+void init_queue (Queue*,int);
+int queue_enqueue (Queue*, int);
+int queue_dequeue (Queue*);
+
+
+
+
+
 typedef struct {int val;} CircularQueue;
 typedef struct {int val;} Dequeue;
 
