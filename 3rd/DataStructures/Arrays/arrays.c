@@ -9,6 +9,7 @@ void init_stack (Stack* this, int cap) {
     this->capacity = cap;
     this->push = &stack_push;
     this->pop = &stack_pop;
+    this->peek = &stack_peek;
 }
 
 
@@ -28,6 +29,13 @@ int stack_pop (Stack* this) {
 }
 
 
+// returns -1 if stack is empty, else the top element without removing it
+int stack_peek (Stack* this) {
+    if (this->top == 0) return -1;
+    return *(this->arr + this->top - 1);
+}
+
+
 
 
 
@@ -39,6 +47,7 @@ void init_queue (Queue* this, int cap) {
     this->size = 0;
     this->enqueue = &queue_enqueue;
     this->dequeue = &queue_dequeue;
+    this->peek = &queue_peek;
 }
 
 
@@ -71,6 +80,15 @@ int queue_dequeue (Queue* this) {
 }
 
 
+// returns -1 if queue is empty, else the front element without removing it
+int queue_peek (Queue* this) {
+    
+    if (this->size == 0) return -1;
+    
+    return *(this->arr + this->front);
+}
+
+
 
 
 
@@ -81,8 +99,10 @@ void init_deque (Deque* this, int cap) {
     this->size = 0;
     this->push_front = &deque_push_front;
     this->pop_front = &deque_pop_front;
+    this->peek_front = &deque_peek_front;
     this->push_back = &deque_push_back;
     this->pop_back = &deque_pop_back;
+    this->peek_back = &deque_peek_back;
 }
 
 
@@ -113,6 +133,15 @@ int deque_pop_front (Deque* this) {
 }
 
 
+// returns -1 if deque is empty, else the front element without removing it
+int deque_peek_front (Deque* this) {
+    
+    if (this->size == 0) return -1;
+    
+    return *(this->arr + this->front);
+}
+
+
 // returns -1 if deque is full, else the number of elements in deque
 int deque_push_back (Deque* this, int val) {
     
@@ -132,6 +161,15 @@ int deque_pop_back (Deque* this) {
     this->size--;
     
     int val =  *(this->arr + ((this->front + this->size) % this->capacity));
+    
+    return val;
+}
+
+// returns -1 if deque is empty, else the back element without removing it
+int deque_peek_back (Deque* this) {
+    
+    if (this->size == 0) return -1;
+    int val =  *(this->arr + ((this->front + this->size - 1) % this->capacity));
     
     return val;
 }

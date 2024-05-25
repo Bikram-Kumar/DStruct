@@ -2,11 +2,11 @@
 #include "main.h"
 #define NEW(x) malloc(sizeof(x))
 
-void print(Deque* this) {
-    printf("Deque: ");
+void print(Stack* this) {
+    printf("stack: ");
     
-    for (int i = 0; i < this->size; i++) {
-        printf("%d ", *(this->arr + ((this->front + i) % this->capacity)));
+    for (int i = 0; i < this->top; i++) {
+        printf("%d ", *(this->arr + i));
     }
    
   
@@ -16,23 +16,20 @@ void print(Deque* this) {
 
 
 int main() {
-    Deque* q = NEW(Deque);
-    init_deque(q,4);
+    Stack* q = NEW(Stack);
+    init_stack(q,4);
     int n,j,k;
     while (1) {
         scanf("%d", &n);
         
         if (n == 1) {
             scanf("%d", &k);
-            j = q->push_front(q, k);
+            j = q->push(q, k);
         } else if (n == 2) {
-            j = q->pop_front(q);
+            j = q->pop(q);
         } else if (n == 3) {
-            scanf("%d", &k);
-            j = q->push_back(q, k);
-        } else if (n == 4) {
-            j = q->pop_back(q);
-        }
+            j = q->peek(q);
+        } 
         
         printf("%d\n", j);
         print(q);
