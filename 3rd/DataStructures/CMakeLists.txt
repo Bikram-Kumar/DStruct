@@ -7,6 +7,7 @@ add_executable(
     main.c
     LinkedList/linked_list.c
     Arrays/arrays.c
+    Tree/tree.c
     
 )
 

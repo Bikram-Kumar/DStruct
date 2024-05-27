@@ -16,7 +16,7 @@ typedef struct LinkedList {
 } LinkedList;
 
 
-void init_linked_list(LinkedList*);
+LinkedList* init_linked_list(LinkedList*);
 
 void linked_list_add(LinkedList*,LinkedList*,int);
 void linked_list_insert(LinkedList*,LinkedList*,int,int);
@@ -47,7 +47,7 @@ typedef struct DLinkedList {
 
 
 
-void init_dlinked_list(DLinkedList*);
+DLinkedList* init_dlinked_list(DLinkedList*);
 
 void dlinked_list_add(DLinkedList*,DLinkedList*,int);
 void dlinked_list_insert(DLinkedList*,DLinkedList*,int,int);

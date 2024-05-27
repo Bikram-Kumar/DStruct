@@ -1,26 +1,28 @@
 
 #include "linked_list.h"
 
-void init_linked_list(LinkedList* ll) {
-    ll->val = 0;
-    ll->next = NULL;
-    ll->add = &linked_list_add;
-    ll->insert = &linked_list_insert;
-    ll->remove = &linked_list_remove;
-    ll->find = &linked_list_find;
-    ll->size = &linked_list_size;
+LinkedList* init_linked_list(LinkedList* this) {
+    this->val = 0;
+    this->next = NULL;
+    this->add = &linked_list_add;
+    this->insert = &linked_list_insert;
+    this->remove = &linked_list_remove;
+    this->find = &linked_list_find;
+    this->size = &linked_list_size;
+    return this;
 }
 
 
-void init_dlinked_list(DLinkedList* ll) {
-    ll->prev = NULL;
-    ll->val = 0;
-    ll->next = NULL;
-    ll->add = &dlinked_list_add;
-    ll->insert = &dlinked_list_insert;
-    ll->remove = &dlinked_list_remove;
-    ll->find = &dlinked_list_find;
-    ll->size = &dlinked_list_size;
+DLinkedList* init_dlinked_list(DLinkedList* this) {
+    this->prev = NULL;
+    this->val = 0;
+    this->next = NULL;
+    this->add = &dlinked_list_add;
+    this->insert = &dlinked_list_insert;
+    this->remove = &dlinked_list_remove;
+    this->find = &dlinked_list_find;
+    this->size = &dlinked_list_size;
+    return this;
 }
 
 
