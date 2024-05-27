@@ -10,6 +10,7 @@ Stack* init_stack (Stack* this, int cap) {
     this->push = &stack_push;
     this->pop = &stack_pop;
     this->peek = &stack_peek;
+    this->destroy = &stack_destroy;
     return this;
 }
 
@@ -36,6 +37,10 @@ int stack_peek (Stack* this) {
     return *(this->arr + this->top - 1);
 }
 
+void stack_destroy (Stack* this) {
+    free(this->arr);
+    free(this);
+}
 
 
 
@@ -49,6 +54,7 @@ Queue* init_queue (Queue* this, int cap) {
     this->enqueue = &queue_enqueue;
     this->dequeue = &queue_dequeue;
     this->peek = &queue_peek;
+    this->destroy = &queue_destroy;
     return this;
 }
 
@@ -90,6 +96,10 @@ int queue_peek (Queue* this) {
     return *(this->arr + this->front);
 }
 
+void queue_destroy (Queue* this) {
+    free(this->arr);
+    free(this);
+}
 
 
 
@@ -105,6 +115,7 @@ Deque* init_deque (Deque* this, int cap) {
     this->push_back = &deque_push_back;
     this->pop_back = &deque_pop_back;
     this->peek_back = &deque_peek_back;
+    this->destroy = &deque_destroy;
     return this;
 }
 
@@ -178,6 +189,10 @@ int deque_peek_back (Deque* this) {
 }
 
 
+void deque_destroy (Deque* this) {
+    free(this->arr);
+    free(this);
+}
 
 
 
@@ -191,6 +206,7 @@ GStack* init_gstack (GStack* this, int cap) {
     this->push = &gstack_push;
     this->pop = &gstack_pop;
     this->peek = &gstack_peek;
+    this->destroy = &gstack_destroy;
     return this;
 }
 
@@ -217,6 +233,10 @@ void* gstack_peek (GStack* this) {
     return *(this->arr + this->top - 1);
 }
 
+void gstack_destroy (GStack* this) {
+    free(this->arr);
+    free(this);
+}
 
 
 
@@ -233,6 +253,7 @@ GQueue* init_gqueue (GQueue* this, int cap) {
     this->enqueue = &gqueue_enqueue;
     this->dequeue = &gqueue_dequeue;
     this->peek = &gqueue_peek;
+    this->destroy = &gqueue_destroy;
     return this;
 }
 
@@ -274,6 +295,10 @@ void* gqueue_peek (GQueue* this) {
     return *(this->arr + this->front);
 }
 
+void gqueue_destroy (GQueue* this) {
+    free(this->arr);
+    free(this);
+}
 
 
 

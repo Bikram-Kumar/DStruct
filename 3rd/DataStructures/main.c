@@ -21,6 +21,14 @@ void print(Tree* t) {
     
 }
 
+void print_arr(Tree** arr, Tree** end) {
+    printf("Arr: ");
+    while (arr < end) {
+        printf("%d ", (*arr)->val);
+        arr++;
+    }
+    printf("\n");
+}
 
 
 
@@ -37,17 +45,25 @@ int main() {
     t->set_child(t->children[1], 1, init_tree(NEW(Tree), 6, 0));
     t->set_child(t->children[1], 2, init_tree(NEW(Tree), 7, 0));
     
+    
+    
     printf("size: %d\n", t->size);
     printf("%d\n", t->val);
     print(t);
+    
+    
+    
     Tree* arr[t->size];
     t->traverse_bfs(t, arr);
-    
-    GQueue* q = init_gqueue(NEW(GQueue), 5);
-    int v = 65;
-    q->enqueue(q,&v);
-    printf("%d\n", *((int*)(q->peek(q))));
+    print_arr(arr, arr+t->size);
     
     
+    
+    
+    Stack* s = init_stack(NEW(Stack), 5);
+    s->push(s, 6);
+    s->push(s, 12);
+    printf("Stack: %d %d\n", s->arr[0], s->arr[1]);
+    s->destroy(s);
     return 0;
 }

@@ -28,19 +28,28 @@ void tree_set_child(Tree* this, int index, Tree* child) {
 
 void tree_traverse_bfs(Tree* this, Tree** arr) {
     
-    GQueue* q = init_gqueue(malloc(sizeof(GQueue)), this->size);
-    /*
-    q->enqueue(q, this);
-    while (q->size > 0) {
-        Tree* node = q->dequeue(q);
-        
-        for (int i = 0; i < q->) {
-            
-        }
-    }
-    */
+    int count = 0;
     
-    free(q);
+    GQueue* q = init_gqueue(malloc(sizeof(GQueue)), this->size - 1);
+    
+    
+    Tree* node;
+    q->enqueue(q, this);
+    
+    while (q->size > 0) {
+        
+        node = q->dequeue(q);
+        
+        for (int i = 0; i < node->degree; i++) {
+            q->enqueue(q, node->children[i]);
+        }
+        
+        arr[count] = node;
+        count++;
+    }
+    
+    q->destroy(q);
+    
     
 }
 
