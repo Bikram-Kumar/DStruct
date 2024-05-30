@@ -13,15 +13,15 @@ typedef struct Tree {
     int size;
     void (*set_child) (struct Tree*, int, struct Tree*);
     void (*traverse_bfs) (struct Tree*, struct Tree**);
-    void (*traverse_pre) (struct Tree*);
-    void (*traverse_post) (struct Tree*);
+    void (*traverse_pre) (struct Tree*, struct Tree**);
+    void (*traverse_post) (struct Tree*, struct Tree**);
 } Tree;
 
 Tree* init_tree (Tree*, int, int);
 void tree_set_child (Tree*, int, Tree*);
 void tree_traverse_bfs (Tree*, Tree**);
-void tree_traverse_pre (Tree*);
-void tree_traverse_post (Tree*);
+void tree_traverse_pre (Tree*, Tree**);
+void tree_traverse_post (Tree*, Tree**);
 
 
 

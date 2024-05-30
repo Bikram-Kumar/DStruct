@@ -53,17 +53,14 @@ int main() {
     
     
     
-    Tree* arr[t->size];
-    t->traverse_bfs(t, arr);
+    Tree** arr = malloc(sizeof(Tree*) * t->size);
+    t->traverse_pre(t, arr);
     print_arr(arr, arr+t->size);
     
+    t->traverse_post(t, arr);
+    print_arr(arr, arr+t->size);
     
+    free(arr);
     
-    
-    Stack* s = init_stack(NEW(Stack), 5);
-    s->push(s, 6);
-    s->push(s, 12);
-    printf("Stack: %d %d\n", s->arr[0], s->arr[1]);
-    s->destroy(s);
     return 0;
 }
