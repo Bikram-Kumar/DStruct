@@ -23,9 +23,41 @@ void tree_traverse_bfs (Tree*, Tree**);
 void tree_traverse_pre (Tree*, Tree**);
 void tree_traverse_post (Tree*, Tree**);
 
+void tree_traverse_post_add_children (Tree*, Tree**, int*); // util for tree_traverse_post
+
+   
 
 
-typedef struct {int val;} BinaryTree;
+typedef struct BinaryTree {
+    int val;
+    struct BinaryTree* parent;
+    struct BinaryTree* left;
+    struct BinaryTree* right;
+    
+    int (*get_size) (struct BinaryTree*);
+    void (*traverse_bfs) (struct BinaryTree*, struct BinaryTree**);
+    void (*traverse_pre) (struct BinaryTree*, struct BinaryTree**);
+    void (*traverse_in) (struct BinaryTree*, struct BinaryTree**);
+    void (*traverse_post) (struct BinaryTree*, struct BinaryTree**);
+    
+    
+} BinaryTree;
+
+
+BinaryTree* create_binary_tree(int);
+int binary_tree_get_size (BinaryTree*);
+void binary_tree_traverse_bfs (BinaryTree*, BinaryTree**);
+void binary_tree_traverse_pre (BinaryTree*, BinaryTree**);
+void binary_tree_traverse_in (BinaryTree*, BinaryTree**);
+void binary_tree_traverse_post (BinaryTree*, BinaryTree**);
+
+// util functions
+void binary_tree_traverse_in_add (BinaryTree*, BinaryTree**, int*); 
+void binary_tree_traverse_post_add (BinaryTree*, BinaryTree**, int*); 
+
+
+
+
 typedef struct {int val;} BinarySearchTree;
 typedef struct {int val;} ThreadedBinaryTree;
 typedef struct {int val;} Heap;

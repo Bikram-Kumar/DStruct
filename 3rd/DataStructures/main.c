@@ -21,8 +21,8 @@ void print(Tree* t) {
     
 }
 
-void print_arr(Tree** arr, Tree** end) {
-    printf("Arr: ");
+void print_arr(char* mess, BinaryTree** arr, BinaryTree** end) {
+    printf("%s", mess);
     while (arr < end) {
         printf("%d ", (*arr)->val);
         arr++;
@@ -35,30 +35,38 @@ void print_arr(Tree** arr, Tree** end) {
 
 
 int main() {
-    Tree* t = init_tree(NEW(Tree), 0, 2);
-    t->set_child(t, 0, init_tree(NEW(Tree), 1, 2));
-    t->set_child(t->children[0], 0, init_tree(NEW(Tree), 3, 0));
-    t->set_child(t->children[0], 1, init_tree(NEW(Tree), 4, 0));
+    BinaryTree* t = create_binary_tree(0);
     
-    t->set_child(t, 1, init_tree(NEW(Tree), 2, 3));
-    t->set_child(t->children[1], 0, init_tree(NEW(Tree), 5, 0));
-    t->set_child(t->children[1], 1, init_tree(NEW(Tree), 6, 0));
-    t->set_child(t->children[1], 2, init_tree(NEW(Tree), 7, 0));
+    t->left = create_binary_tree(1);
+    t->right = create_binary_tree(2);
+    
+    t->left->left = create_binary_tree(3);
+    t->left->right = create_binary_tree(4);
+    t->right->left = create_binary_tree(5);
+    t->right->right = create_binary_tree(6);
+    
+    t->left->right->right = create_binary_tree(10);
+    t->right->left->right = create_binary_tree(12);
+   
+    
+    printf("size: %d\n", t->get_size(t));
+
     
     
+    BinaryTree** arr = malloc(sizeof(BinaryTree*) * t->get_size(t));
     
-    printf("size: %d\n", t->size);
-    printf("%d\n", t->val);
-    print(t);
+    t->traverse_bfs(t, arr);
+    print_arr("bfs: ", arr, arr + t->get_size(t));
     
-    
-    
-    Tree** arr = malloc(sizeof(Tree*) * t->size);
     t->traverse_pre(t, arr);
-    print_arr(arr, arr+t->size);
+    print_arr("pre: ", arr, arr + t->get_size(t));
+    
+    t->traverse_in(t, arr);
+    print_arr("in: ", arr, arr + t->get_size(t));
     
     t->traverse_post(t, arr);
-    print_arr(arr, arr+t->size);
+    print_arr("post: ", arr, arr + t->get_size(t));
+    
     
     free(arr);
     
