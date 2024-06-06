@@ -2,7 +2,8 @@
 #include "tree.h"
 
 
-Tree* init_tree(Tree* this, int val, int degree) {
+Tree* create_tree(int val, int degree) {
+    Tree* this = malloc(sizeof(Tree));
     this->val = val;
     this->parent = NULL;
     this->children = malloc(sizeof(Tree*) * degree);
@@ -12,6 +13,7 @@ Tree* init_tree(Tree* this, int val, int degree) {
     this->traverse_bfs = &tree_traverse_bfs;
     this->traverse_pre = &tree_traverse_pre;
     this->traverse_post = &tree_traverse_post;
+    this->destroy = &destroy_tree;
     return this;
 }
 
@@ -112,6 +114,14 @@ void tree_traverse_post_add_children (Tree* this, Tree** arr, int* count) {
 
 
 
+void destroy_tree(Tree* this) {
+    
+    for (int i = 0; i < this->degree; i++) {
+        destroy_tree(this->children[i]);
+    }
+    
+    free(this);
+}
 
 
 
@@ -123,14 +133,35 @@ BinaryTree* create_binary_tree (int val) {
     this->parent = NULL;
     this->left = NULL;
     this->right = NULL;
+    this->set_left = &binary_tree_set_left;
+    this->set_right = &binary_tree_set_right;
     this->get_size = &binary_tree_get_size;
     this->traverse_bfs = &binary_tree_traverse_bfs;
     this->traverse_pre = &binary_tree_traverse_pre;
     this->traverse_in = &binary_tree_traverse_in;
     this->traverse_post = &binary_tree_traverse_post;
+    this->destroy = &destroy_binary_tree;
     
     return this;
 }
+
+
+void binary_tree_set_left(BinaryTree* this, BinaryTree* left) {
+    
+    this->left = left;
+    left->parent = this;
+    
+}
+
+
+
+void binary_tree_set_right(BinaryTree* this, BinaryTree* right) {
+    
+    this->right = right;
+    right->parent = this;
+    
+}
+
 
 
 int binary_tree_get_size(BinaryTree* t) {
@@ -242,3 +273,11 @@ void binary_tree_traverse_post(BinaryTree* this, BinaryTree** arr) {
 }
 
 
+
+void destroy_binary_tree(BinaryTree* this) {
+    if (this == NULL) return;
+    
+    destroy_binary_tree(this->left);
+    destroy_binary_tree(this->right);
+    free(this);
+}

@@ -37,16 +37,16 @@ void print_arr(char* mess, BinaryTree** arr, BinaryTree** end) {
 int main() {
     BinaryTree* t = create_binary_tree(0);
     
-    t->left = create_binary_tree(1);
-    t->right = create_binary_tree(2);
+    t->set_left(t, create_binary_tree(1));
+    t->set_right(t, create_binary_tree(2));
     
-    t->left->left = create_binary_tree(3);
-    t->left->right = create_binary_tree(4);
-    t->right->left = create_binary_tree(5);
-    t->right->right = create_binary_tree(6);
+    t->set_left(t->left, create_binary_tree(3));
+    t->set_right(t->left, create_binary_tree(4));
+    t->set_left(t->right, create_binary_tree(5));
+    t->set_right(t->right, create_binary_tree(6));
     
-    t->left->right->right = create_binary_tree(10);
-    t->right->left->right = create_binary_tree(12);
+    t->set_right(t->left->right, create_binary_tree(10));
+    t->set_right(t->right->left, create_binary_tree(12));
    
     
     printf("size: %d\n", t->get_size(t));
@@ -67,7 +67,7 @@ int main() {
     t->traverse_post(t, arr);
     print_arr("post: ", arr, arr + t->get_size(t));
     
-    
+    t->destroy(t);
     free(arr);
     
     return 0;
