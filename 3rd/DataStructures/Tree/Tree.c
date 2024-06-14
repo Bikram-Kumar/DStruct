@@ -281,3 +281,158 @@ void destroy_binary_tree(BinaryTree* this) {
     destroy_binary_tree(this->right);
     free(this);
 }
+
+
+
+
+BinarySearchTree* create_binary_search_tree(int val) {
+    BinarySearchTree* this = malloc(sizeof(BinarySearchTree));
+    
+    this->btree = create_binary_tree(val);
+    this->btree->attached = this;
+    
+    this->get_val = &binary_search_tree_get_val;
+    this->set_val = &binary_search_tree_set_val;
+    this->get_parent = &binary_search_tree_get_parent;
+    this->get_left = &binary_search_tree_get_left;
+    this->set_left = &binary_search_tree_set_left;
+    this->get_right = &binary_search_tree_get_right;
+    this->set_right = &binary_search_tree_set_right;
+    this->add_to_tree = &binary_search_tree_add_to_tree;
+    this->traverse_bfs = &binary_search_tree_traverse_bfs;
+    this->traverse_pre = &binary_search_tree_traverse_pre;
+    this->traverse_in = &binary_search_tree_traverse_in;
+    this->traverse_post = &binary_search_tree_traverse_post;
+    this->get_size = &binary_search_tree_get_size;
+    this->destroy = &destroy_binary_search_tree;
+    
+    return this;
+}
+
+
+int binary_search_tree_get_val(BinarySearchTree* this) {
+    return this->btree->val;
+}
+
+void binary_search_tree_set_val(BinarySearchTree* this, int val) {
+    this->btree->val = val;
+}
+
+BinarySearchTree* binary_search_tree_get_parent (BinarySearchTree* this) {
+    if (this->btree->parent == NULL) return NULL;
+    return this->btree->parent->attached;
+}
+
+BinarySearchTree* binary_search_tree_get_left (BinarySearchTree* this) {
+    if (this->btree->left == NULL) return NULL;
+    return this->btree->left->attached;
+}
+
+void binary_search_tree_set_left (BinarySearchTree* this, BinarySearchTree* left) {
+    this->btree->set_left(this->btree, left->btree);
+}
+
+BinarySearchTree* binary_search_tree_get_right (BinarySearchTree* this) {
+    if (this->btree->right == NULL) return NULL;
+    return this->btree->right->attached;
+}
+
+void binary_search_tree_set_right (BinarySearchTree* this, BinarySearchTree* right) {
+    this->btree->set_right(this->btree, right->btree);
+}
+
+
+
+void binary_search_tree_add_to_tree (BinarySearchTree* this, BinarySearchTree* child) {
+    
+    if (this->btree->val > child->btree->val) {
+        if (this->get_left(this) == NULL) {
+            this->set_left(this, child);
+        } else {
+            this->add_to_tree(this->get_left(this), child);
+        }
+    } else {
+        if (this->get_right(this) == NULL) {
+            this->set_right(this, child);
+        } else {
+            this->add_to_tree(this->get_right(this), child);
+        }
+    }
+    
+    
+}
+
+
+
+
+void binary_search_tree_traverse_bfs(BinarySearchTree* this, BinarySearchTree** arr) {
+    int size = this->get_size(this);
+    BinaryTree** barr = malloc(sizeof(BinaryTree*) * size);
+    this->btree->traverse_bfs(this->btree, barr);
+    
+    for (int i = 0; i < size; i++) {
+        arr[i] = barr[i]->attached;
+    }
+    
+    free(barr);
+}
+
+
+void binary_search_tree_traverse_pre(BinarySearchTree* this, BinarySearchTree** arr) {
+    int size = this->get_size(this);
+    BinaryTree** barr = malloc(sizeof(BinaryTree*) * size);
+    this->btree->traverse_pre(this->btree, barr);
+    
+    for (int i = 0; i < size; i++) {
+        arr[i] = barr[i]->attached;
+    }
+    
+    free(barr);
+}
+
+void binary_search_tree_traverse_in(BinarySearchTree* this, BinarySearchTree** arr) {
+    int size = this->get_size(this);
+    BinaryTree** barr = malloc(sizeof(BinaryTree*) * size);
+    this->btree->traverse_in(this->btree, barr);
+    
+    for (int i = 0; i < size; i++) {
+        arr[i] = barr[i]->attached;
+    }
+    
+    free(barr);
+}
+
+void binary_search_tree_traverse_post(BinarySearchTree* this, BinarySearchTree** arr) {
+    int size = this->get_size(this);
+    BinaryTree** barr = malloc(sizeof(BinaryTree*) * size);
+    this->btree->traverse_post(this->btree, barr);
+    
+    for (int i = 0; i < size; i++) {
+        arr[i] = barr[i]->attached;
+    }
+    
+    free(barr);
+}
+
+
+
+
+int binary_search_tree_get_size (BinarySearchTree* this) {
+    
+    return this->btree->get_size(this->btree);
+    
+}
+
+
+
+void destroy_binary_search_tree(BinarySearchTree* this) {
+    
+    if (this == NULL) return;
+        
+    this->destroy(this->get_left(this));
+    this->destroy(this->get_right(this));
+    
+    
+    free(this->btree);
+    free(this);
+}
