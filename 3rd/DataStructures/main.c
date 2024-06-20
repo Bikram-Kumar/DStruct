@@ -3,7 +3,7 @@
 
 
 
-void print_arr(char* mess, BinarySearchTree** arr, BinarySearchTree** end) {
+void print_arr(char* mess, Heap** arr, Heap** end) {
     printf("%s", mess);
     while (arr < end) {
         printf("%d ", (*arr)->get_val(*arr));
@@ -17,23 +17,22 @@ void print_arr(char* mess, BinarySearchTree** arr, BinarySearchTree** end) {
 
 
 int main() {
-    BinarySearchTree* t = create_binary_search_tree(4);
-    
-    t->add_to_tree(t, create_binary_search_tree(1));
-    t->add_to_tree(t, create_binary_search_tree(-6));
-    t->add_to_tree(t, create_binary_search_tree(2));
-    t->add_to_tree(t, create_binary_search_tree(-4));
-    t->add_to_tree(t, create_binary_search_tree(4));
-    t->add_to_tree(t, create_binary_search_tree(3));
-    t->add_to_tree(t, create_binary_search_tree(0));
-    t->add_to_tree(t, create_binary_search_tree(2));
-     printf("root: %d\n", t->get_val(t));
-     printf("root.left.right: %d\n", t->get_val(t->get_right(t->get_left(t))));
-     printf("size: %d\n", t->get_size(t));
 
+    Heap* t = create_heap(4);
     
+    t = t->push(t, create_heap(1));
+    t = t->push(t, create_heap(8));
+    t = t->push(t, create_heap(0));
+    t = t->push(t, create_heap(156));
+    t = t->push(t, create_heap(-3));
+    t = t->push(t, create_heap(-7));
+    t = t->push(t, create_heap(4));
+    t = t->push(t, create_heap(-39));
+    t = t->push(t, create_heap(75));
     
-    BinarySearchTree** arr = malloc(sizeof(BinarySearchTree*) * t->get_size(t));
+     
+    
+    Heap** arr = malloc(sizeof(Heap*) * t->get_size(t));
     
     t->traverse_bfs(t, arr);
     print_arr("bfs: ", arr, arr + t->get_size(t));
@@ -50,6 +49,7 @@ int main() {
     t->destroy(t);
     free(arr);
   
+    
     
     return 0;
 }
