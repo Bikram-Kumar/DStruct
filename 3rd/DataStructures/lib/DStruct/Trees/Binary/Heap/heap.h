@@ -75,3 +75,15 @@ void heap_swap_with_parent(Heap*);
 
 void destroy_heap(Heap*);
 
+
+
+/* Array functions */
+
+
+// creates Heap from array and returns root node
+struct Heap* heap_from_arr(int* start, int* end);
+
+void arr_from_heap(struct Heap* root, int* start, int* end);
+void aheap_sift_up(int* node, int* start, int* end);
+void aheap_sift_down(int* node, int* start, int* end);
+void aheap_heapify(int* start, int* end);

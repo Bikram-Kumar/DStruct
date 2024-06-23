@@ -1,79 +1,80 @@
 
-#include "dlinkedlist.h"
+#include "linkedlist.h"
 
-
-
-DLinkedList* init_dlinked_list(DLinkedList* this) {
-    this->prev = NULL;
+LinkedList* init_linkedlist(LinkedList* this) {
     this->val = 0;
     this->next = NULL;
-    this->add = &dlinked_list_add;
-    this->insert = &dlinked_list_insert;
-    this->remove = &dlinked_list_remove;
-    this->find = &dlinked_list_find;
-    this->size = &dlinked_list_size;
+    this->add = &linkedlist_add;
+    this->insert = &linkedlist_insert;
+    this->remove = &linkedlist_remove;
+    this->find = &linkedlist_find;
+    this->size = &linkedlist_size;
     return this;
 }
 
 
 
+// adds the value to the list
+// ll is an uninitialized LinkedList*, pass malloc(sizeof(LinkedList))
 
-
-void dlinked_list_add(DLinkedList* this, DLinkedList* ll, int val) {
-    init_dlinked_list(ll);
+void linkedlist_add(LinkedList* this, LinkedList* ll, int val) {
+    init_linkedlist(ll);
     ll->val = val;
     while (this->next != NULL) {
         this = this->next;
     }
     this->next = ll;
-    ll->prev = this;
 }
 
 
 
-
-void dlinked_list_insert(DLinkedList* this, DLinkedList* ll, int index, int val) {
+// inserts the value in the list at given index
+void linkedlist_insert(LinkedList* this, LinkedList* ll, int index, int val) {
     if (index > this->size(this)) return;
     
-    init_dlinked_list(ll);
+    init_linkedlist(ll);
     ll->val = val;
     for (int i = 0; i < index-1; i++) {
         this = this->next;
     }
-    
     ll->next = this->next;
-    this->next->prev = ll;
     this->next = ll;
-    ll->prev = this;
 }
 
 
 
-void dlinked_list_remove(DLinkedList* this, int index) {
+
+
+// removes the element at given index
+void linkedlist_remove(LinkedList* this, int index) {
     int size = this->size(this);
     if (size < index) return;
     
     if (index == 0) {
-        this->next->prev = NULL;
-        this->val = this->next->val;
         this->val = this->next->val;
         this->next = this->next->next;
         return;
     }
     
    
+    LinkedList* prev;
     for (int i = 0; i < index; i++) {
+        prev = this;
         this = this->next;
     }
     
-    this->prev->next = this->next;
-    if (this->next == NULL) return;
-    this->next->prev = this->prev;
+    prev->next = this->next;
     
 }
 
 
-int dlinked_list_find(DLinkedList* this, int num) {
+
+
+
+
+
+// finds first match and returns its index
+int linkedlist_find(LinkedList* this, int num) {
     int size = this->size(this);
     
     for (int i = 0; i < size; i++) {
@@ -87,7 +88,12 @@ int dlinked_list_find(DLinkedList* this, int num) {
 
 }
 
-int dlinked_list_size(DLinkedList* this) {
+
+
+
+
+// returns number of elements in the list
+int linkedlist_size(LinkedList* this) {
     int size = 0;
     
     while (this != NULL) {

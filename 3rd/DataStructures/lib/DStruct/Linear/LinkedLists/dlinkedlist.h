@@ -22,13 +22,13 @@ typedef struct DLinkedList {
 
 
 
-DLinkedList* init_dlinked_list(DLinkedList*);
+DLinkedList* init_dlinkedlist(DLinkedList*);
 
-void dlinked_list_add(DLinkedList*,DLinkedList*,int);
-void dlinked_list_insert(DLinkedList*,DLinkedList*,int,int);
-void dlinked_list_remove(DLinkedList*,int);
-int dlinked_list_find(DLinkedList*,int);
+void dlinkedlist_add(DLinkedList*,DLinkedList*,int);
+void dlinkedlist_insert(DLinkedList*,DLinkedList*,int,int);
+void dlinkedlist_remove(DLinkedList*,int);
+int dlinkedlist_find(DLinkedList*,int);
 
-int dlinked_list_size(DLinkedList*);
+int dlinkedlist_size(DLinkedList*);
    
 

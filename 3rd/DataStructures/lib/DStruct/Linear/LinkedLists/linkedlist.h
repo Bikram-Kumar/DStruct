@@ -16,12 +16,12 @@ typedef struct LinkedList {
 } LinkedList;
 
 
-LinkedList* init_linked_list(LinkedList*);
+LinkedList* init_linkedlist(LinkedList*);
 
-void linked_list_add(LinkedList*,LinkedList*,int);
-void linked_list_insert(LinkedList*,LinkedList*,int,int);
-void linked_list_remove(LinkedList*,int);
-int linked_list_find(LinkedList*,int);
+void linkedlist_add(LinkedList*,LinkedList*,int);
+void linkedlist_insert(LinkedList*,LinkedList*,int,int);
+void linkedlist_remove(LinkedList*,int);
+int linkedlist_find(LinkedList*,int);
 
-int linked_list_size(LinkedList*);
+int linkedlist_size(LinkedList*);
    

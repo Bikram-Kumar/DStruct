@@ -48,7 +48,6 @@ int main() {
     
     t->destroy(t);
     free(arr);
-  
     
     
     return 0;
