@@ -4,7 +4,7 @@ string(REPLACE "&" ";" allIncludes ${allIncludes})
 
 
 execute_process(
-    COMMAND ${CMAKE_COMMAND} -E make_directory ${binDir}/include/DStruct
+    COMMAND ${CMAKE_COMMAND} -E make_directory "${binDir}/include/DStruct"
 )
 
 foreach(header ${allIncludes})

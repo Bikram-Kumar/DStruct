@@ -17,7 +17,7 @@ The library contains the following type definitions:
 * Heap
 * Graph
 
-To use, `#include` the corresponding header file, named the same in lowercase like, `#include "DStruct/bstree.h"`
+To use, `#include` the corresponding header file, named the same in lowercase like, `#include <bstree.h>`
 
 You can create an instance of a type by using `create_TYPE()` functions, which returns the pointer to the instance. `create_TYPE()` allocates memory
 on heap using `malloc()` functions, so you must call the corresponding `destroy_TYPE()`, to free up the allocated memory, when you are done with it.
