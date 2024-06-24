@@ -9,9 +9,9 @@ Or, if you want to build the library from source, [follow these steps](#building
 
 If you want to use the library independently, [download the release](https://github.com/Bikram-Kumar/DStruct/releases) and unzip it. 
 You will get a `.a` or `.so` or `.lib` or `.dll` file depending on the download, and an `include` directory.
-1. Add `include/DStruct/` directory to your include path.
-2. Add `DStruct/` to your library path. 
-3. Link `DStruct` while compiling your project.
+1. Add `include/DStruct/` directory to your [include path](https://gcc.gnu.org/onlinedocs/gcc/Directory-Options.html).
+2. Add the root `DStruct/` directory to your library path. Or alternatively, move the library file to one of the places where the linker searches for while linking. See [[L]](https://man7.org/linux/man-pages/man8/ld.so.8.html) [[W]](https://learn.microsoft.com/en-us/windows/win32/dlls/dynamic-link-library-search-order?redirectedfrom=MSDN#search_order_for_desktop_applications)
+3. [Link](https://gcc.gnu.org/onlinedocs/gcc/Link-Options.html#index-Libraries) `DStruct` while compiling your project.
 
 
 

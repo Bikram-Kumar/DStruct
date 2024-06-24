@@ -10,6 +10,13 @@ option(OUT_INCLUDES "Generate include folder with all headers" OFF)
 
 
 set(
+    ArraysDirSources
+    darray.c
+    garray.c
+)
+
+
+set(
     LinearDirSources
     Stacks/stack.c
     Stacks/gstack.c
@@ -30,6 +37,7 @@ set(
 
 set(
     includeDirs
+    ./Arrays/
     ./Linear/Stacks/
     ./Linear/Queues/
     ./Linear/LinkedLists/
@@ -39,10 +47,18 @@ set(
     ./Graph/
 )
 
+list(TRANSFORM ArraysDirSources PREPEND ./Arrays/)
 list(TRANSFORM LinearDirSources PREPEND ./Linear/)
 list(TRANSFORM TreesDirSources PREPEND ./Trees/)
 
-set(allSources ${LinearDirSources} ${TreesDirSources})
+set(
+    allSources
+    
+    
+    ${ArraysDirSources}
+    ${LinearDirSources}
+    ${TreesDirSources}
+)
 
 
 add_library(
@@ -62,6 +78,7 @@ if (OUT_INCLUDES)
     set(allIncludes ${allSources})
     
     list(TRANSFORM allIncludes REPLACE "c$" "h")
+    list(APPEND allIncludes ./Arrays/darrayutils.h)
     
     # cmake replaces ';' with whitespace on passing list to the script so replace it with '&' and revert in script
     
