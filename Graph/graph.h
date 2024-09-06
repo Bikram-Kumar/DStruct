@@ -1,2 +1,9 @@
+#include "graphnode.h"
+#include "garray.h"
 
-typedef struct {int val;} Graph;
+
+typedef struct Graph {
+    GraphNode* node;
+    GArray* edges;
+
+} Graph;

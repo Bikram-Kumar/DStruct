@@ -2,13 +2,13 @@
 ## INTRODUCTION 
 
 The library contains the following type definitions:
-* DArray
+* DArray (Dynamic Array)
 * LinkedList
 * DLinkedList
 * Stack
-* GStack
+* GStack (Generic Stack)
 * Queue
-* GQueue
+* GQueue (Generic Queue)
 * Deque
 * Tree
 * BTree
