@@ -15,8 +15,8 @@ typedef struct DLinkedList {
     // adds node to the end of list
     void (*push_back) (struct DLinkedList* this, struct DLinkedList* node);
 
-    // adds node to the front of list
-    void (*push_front) (struct DLinkedList* this, struct DLinkedList* node);
+    // Adds `node` to the front of list. Return `node` which is the new head of list
+    struct DLinkedList* (*push_front) (struct DLinkedList* this, struct DLinkedList* node);
 
     // inserts the node right next to this node in the list
     void (*insert_next) (struct DLinkedList* this, struct DLinkedList* node);
@@ -46,7 +46,7 @@ typedef struct DLinkedList {
 DLinkedList* create_dlinkedlist(int val);
 
 void dlinkedlist_push_back(DLinkedList* this, DLinkedList* node);
-void dlinkedlist_push_front(DLinkedList* this, DLinkedList* node);
+DLinkedList* dlinkedlist_push_front(DLinkedList* this, DLinkedList* node);
 void dlinkedlist_insert_next(DLinkedList* this, DLinkedList* node);
 void dlinkedlist_insert(DLinkedList* this, DLinkedList* node, int index);
 void dlinkedlist_remove(DLinkedList* this, int index);

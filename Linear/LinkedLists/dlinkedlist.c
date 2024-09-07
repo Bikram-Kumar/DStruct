@@ -35,13 +35,14 @@ void dlinkedlist_push_back(DLinkedList* this, DLinkedList* node) {
 }
 
 
-// adds node to the front of list
-void dlinkedlist_push_front(DLinkedList* this, DLinkedList* node) {
+// Adds `node` to the front of list. Return `node`.
+DLinkedList* dlinkedlist_push_front(DLinkedList* this, DLinkedList* node) {
     while (this->prev != NULL) {
         this = this->prev;
     }
     this->prev = node;
     node->next = this;
+    return node;
 }
 
 
