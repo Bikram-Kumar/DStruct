@@ -1,6 +1,8 @@
 
 #include "linkedlist.h"
 
+
+// Allocate a new LinkedList Node and return its pointer
 LinkedList* create_linkedlist(int val) {
     LinkedList* this = malloc(sizeof(LinkedList));
     this->val = val;
@@ -12,7 +14,7 @@ LinkedList* create_linkedlist(int val) {
     this->remove_next = &linkedlist_remove_next;
     this->find = &linkedlist_find;
     this->size = &linkedlist_size;
-    this->destroy = &destroy_linked_list;
+    this->destroy = &destroy_linkedlist;
     return this;
 }
 
@@ -53,7 +55,7 @@ void linkedlist_insert(LinkedList* this, LinkedList* node, int index) {
 
 
 
-// removes the node at given index
+// Removes the node at given index. If index is 0, `this` will be updated to `this->next`
 void linkedlist_remove(LinkedList* this, int index) {
     int size = this->size(this);
     if (size < index) return;
@@ -61,6 +63,7 @@ void linkedlist_remove(LinkedList* this, int index) {
     if (index == 0) {
         this->val = this->next->val;
         this->next = this->next->next;
+        free(this->next);
         return;
     }
     
@@ -72,13 +75,14 @@ void linkedlist_remove(LinkedList* this, int index) {
     }
     
     prev->next = this->next;
+    free(this);
     
 }
 
 
 
 
-// removes this->next from the list
+// removes `this->next` from the list
 void linkedlist_remove_next (LinkedList* this) {
 
     LinkedList* next = this->next;
@@ -125,10 +129,10 @@ int linkedlist_size(LinkedList* this) {
 
 
 // frees this and all next nodes
-void destroy_linked_list(LinkedList* this) {
+void destroy_linkedlist(LinkedList* this) {
     
     if (this->next != NULL) {
-        destroy_linked_list(this->next);
+        destroy_linkedlist(this->next);
     }
 
     free(this);

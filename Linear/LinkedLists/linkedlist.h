@@ -43,5 +43,5 @@ void linkedlist_remove_next (LinkedList* this);
 int linkedlist_find(LinkedList* this, int num);
 
 int linkedlist_size(LinkedList* this);
-void destroy_linked_list(LinkedList* this);
+void destroy_linkedlist(LinkedList* this);
    

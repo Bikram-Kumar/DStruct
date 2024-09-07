@@ -2,16 +2,22 @@
 #include "dlinkedlist.h"
 
 
+// Allocate a new DLinkedList Node and return its pointer
+DLinkedList* create_dlinkedlist(int val) {
+    DLinkedList* this = malloc(sizeof(DLinkedList));
 
-DLinkedList* init_dlinkedlist(DLinkedList* this) {
     this->prev = NULL;
-    this->val = 0;
+    this->val = val;
     this->next = NULL;
-    this->add = &dlinkedlist_add;
+    this->push_back = &dlinkedlist_push_back;
+    this->push_front = &dlinkedlist_push_front;
     this->insert = &dlinkedlist_insert;
+    this->insert_next = &dlinkedlist_insert_next;
     this->remove = &dlinkedlist_remove;
+    this->remove_next = &dlinkedlist_remove_next;
     this->find = &dlinkedlist_find;
     this->size = &dlinkedlist_size;
+    this->destroy = &destroy_dlinkedlist;
     return this;
 }
 
@@ -19,43 +25,61 @@ DLinkedList* init_dlinkedlist(DLinkedList* this) {
 
 
 
-void dlinkedlist_add(DLinkedList* this, DLinkedList* ll, int val) {
-    init_dlinkedlist(ll);
-    ll->val = val;
+// adds node to the end of list
+void dlinkedlist_push_back(DLinkedList* this, DLinkedList* node) {
     while (this->next != NULL) {
         this = this->next;
     }
-    this->next = ll;
-    ll->prev = this;
+    this->next = node;
+    node->prev = this;
+}
+
+
+// adds node to the front of list
+void dlinkedlist_push_front(DLinkedList* this, DLinkedList* node) {
+    while (this->prev != NULL) {
+        this = this->prev;
+    }
+    this->prev = node;
+    node->next = this;
 }
 
 
 
 
-void dlinkedlist_insert(DLinkedList* this, DLinkedList* ll, int index, int val) {
+// inserts the node right next to this node in the list
+void dlinkedlist_insert_next(DLinkedList* this, DLinkedList* node) {
+
+    node->next = this->next;
+    this->next->prev = node;
+    this->next = node;
+    node->prev = this;
+}
+
+
+
+// inserts the node in the list at given index
+void dlinkedlist_insert(DLinkedList* this, DLinkedList* node, int index) {
     if (index > this->size(this)) return;
     
-    init_dlinkedlist(ll);
-    ll->val = val;
     for (int i = 0; i < index-1; i++) {
         this = this->next;
     }
     
-    ll->next = this->next;
-    this->next->prev = ll;
-    this->next = ll;
-    ll->prev = this;
+    node->next = this->next;
+    this->next->prev = node;
+    this->next = node;
+    node->prev = this;
 }
 
 
-
+// Removes the node at given index. If index is 0, `this` will be updated to `this->next`
 void dlinkedlist_remove(DLinkedList* this, int index) {
     int size = this->size(this);
     if (size < index) return;
     
     if (index == 0) {
         this->next->prev = NULL;
-        this->val = this->next->val;
         this->val = this->next->val;
         this->next = this->next->next;
         return;
@@ -69,10 +93,24 @@ void dlinkedlist_remove(DLinkedList* this, int index) {
     this->prev->next = this->next;
     if (this->next == NULL) return;
     this->next->prev = this->prev;
+    free(this);
     
 }
 
 
+
+// removes `this->next` from the list
+void dlinkedlist_remove_next (DLinkedList* this) {
+
+    DLinkedList* next = this->next;
+    this->next = next->next;
+    this->next->prev = this;
+    free(next);    
+
+}
+
+
+// finds first match and returns its index
 int dlinkedlist_find(DLinkedList* this, int num) {
     int size = this->size(this);
     
@@ -87,6 +125,8 @@ int dlinkedlist_find(DLinkedList* this, int num) {
 
 }
 
+
+// returns number of elements in the list
 int dlinkedlist_size(DLinkedList* this) {
     int size = 0;
     
@@ -95,5 +135,42 @@ int dlinkedlist_size(DLinkedList* this) {
         size++;
     }
     return size;
+}
+
+
+
+
+// destroy `this` and all `prev` nodes
+void destroy_dlinkedlist_prev(DLinkedList* this) {
+    if (this->prev != NULL) {
+        destroy_dlinkedlist_prev(this->prev);
+    }
+
+    free(this);
+}
+
+
+
+
+// destroy `this` and all `next` nodes
+void destroy_dlinkedlist_next(DLinkedList* this) {
+    if (this->next != NULL) {
+        destroy_dlinkedlist_next(this->next);
+    }
+
+    free(this);
+}
+
+
+
+
+// frees `this` and all `prev` and `next` nodes from memory
+void destroy_dlinkedlist(DLinkedList* this) {
+
+    destroy_dlinkedlist_prev(this->prev);
+    destroy_dlinkedlist_next(this->next);
+
+    free(this);
+    
 }
 
