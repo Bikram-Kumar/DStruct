@@ -25,6 +25,7 @@ set(
     Queues/deque.c
     LinkedLists/linkedlist.c
     LinkedLists/dlinkedlist.c
+    LinkedLists/gdlist.c
 )
 
 set(
